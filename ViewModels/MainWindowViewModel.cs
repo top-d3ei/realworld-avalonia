@@ -8,8 +8,6 @@ namespace realworld_avalonia.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     // public string Greeting { get; } = "Welcome to Avalonia!";
-    private PageFactory _pageFactory;
-
     [ObservableProperty]
     private bool _isExpanded = true;
 
@@ -20,8 +18,10 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(MacrosViewIsActive))]
     [NotifyPropertyChangedFor(nameof(ReporterViewIsActive))]
     [NotifyPropertyChangedFor(nameof(HistoryViewIsActive))]
+    [NotifyPropertyChangedFor(nameof(SettingsViewIsActive))]
     // private ViewModelBase _currentView;
     private PageViewModel _currentView;
+    private PageFactory _pageFactory;
 
     public bool HomeViewIsActive => CurrentView.PageName == ApplicationPageNames.Home;
     public bool ProcessViewIsActive => CurrentView.PageName == ApplicationPageNames.Process;
@@ -29,6 +29,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public bool MacrosViewIsActive => CurrentView.PageName == ApplicationPageNames.Macros;
     public bool ReporterViewIsActive => CurrentView.PageName == ApplicationPageNames.Reporter;
     public bool HistoryViewIsActive => CurrentView.PageName == ApplicationPageNames.History;
+    public bool SettingsViewIsActive => CurrentView.PageName == ApplicationPageNames.Settings;
 
     // private readonly HomeViewModel _home;
     // private readonly ProcessViewModel _process;
@@ -60,5 +61,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void GoToReporter() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.Reporter);
     [RelayCommand]
     private void GoToHistory() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.History);
+    [RelayCommand]
+    private void GoToSettings() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.Settings);
 
 }

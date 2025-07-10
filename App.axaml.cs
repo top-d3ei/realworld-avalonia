@@ -31,6 +31,7 @@ public partial class App : Application
         collection.AddTransient<MacrosViewModel>();
         collection.AddTransient<ReporterViewModel>();
         collection.AddTransient<HistoryViewModel>();
+        collection.AddTransient<SettingsViewModel>();
 
         // services.AddTransient<TService>(Func<IServiceProvider, TService> implementationFactory)
         collection.AddSingleton<Func<ApplicationPageNames, PageViewModel>>(
@@ -44,6 +45,7 @@ public partial class App : Application
             ApplicationPageNames.Actions => x.GetRequiredService<ActionsViewModel>(),
             ApplicationPageNames.Reporter => x.GetRequiredService<ReporterViewModel>(),
             ApplicationPageNames.History => x.GetRequiredService<HistoryViewModel>(),
+            ApplicationPageNames.Settings => x.GetRequiredService<SettingsViewModel>(),
             _ => throw new InvalidOperationException(),
         });
         collection.AddSingleton<PageFactory>();
