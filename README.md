@@ -15,7 +15,7 @@ AngelSix.
 2. [x] Avalonia UI Real World (Fonts and Animations)
 3. [x] Avalonia UI Real World (View Model Basics)
 4. [x] Avalonia UI Real World (Page Navigation)
-5. [ ] Avalonia UI Real World (Dependency Injection Factory Pattern)
+5. [x] Avalonia UI Real World (Dependency Injection Factory Pattern)
 6. [ ] Avalonia UI Real World (Page Layout)
 7. [ ] Avalonia UI Real World (Control Themes)
 8. [ ] Avalonia UI Real World (Styling Buttons)

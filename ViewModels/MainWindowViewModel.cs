@@ -1,11 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using realworld_avalonia.Data;
+using realworld_avalonia.Factories;
 
 namespace realworld_avalonia.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
     // public string Greeting { get; } = "Welcome to Avalonia!";
+    private PageFactory _pageFactory;
 
     [ObservableProperty]
     private bool _isExpanded = true;
@@ -17,42 +20,45 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(MacrosViewIsActive))]
     [NotifyPropertyChangedFor(nameof(ReporterViewIsActive))]
     [NotifyPropertyChangedFor(nameof(HistoryViewIsActive))]
-    private ViewModelBase _currentView;
+    // private ViewModelBase _currentView;
+    private PageViewModel _currentView;
 
-    public bool HomeViewIsActive => CurrentView == _home;
-    public bool ProcessViewIsActive => CurrentView == _process;
-    public bool ActionsViewIsActive => CurrentView == _actions;
-    public bool MacrosViewIsActive => CurrentView == _macros;
-    public bool ReporterViewIsActive => CurrentView == _reporter;
-    public bool HistoryViewIsActive => CurrentView == _history;
+    public bool HomeViewIsActive => CurrentView.PageName == ApplicationPageNames.Home;
+    public bool ProcessViewIsActive => CurrentView.PageName == ApplicationPageNames.Process;
+    public bool ActionsViewIsActive => CurrentView.PageName == ApplicationPageNames.Actions;
+    public bool MacrosViewIsActive => CurrentView.PageName == ApplicationPageNames.Macros;
+    public bool ReporterViewIsActive => CurrentView.PageName == ApplicationPageNames.Reporter;
+    public bool HistoryViewIsActive => CurrentView.PageName == ApplicationPageNames.History;
 
-    private readonly HomeViewModel _home = new HomeViewModel();
-    private readonly ProcessViewModel _process = new ProcessViewModel();
-    private readonly ActionsViewModel _actions = new ActionsViewModel();
-    private readonly MacrosViewModel _macros = new MacrosViewModel();
-    private readonly ReporterViewModel _reporter = new ReporterViewModel();
-    private readonly HistoryViewModel _history = new HistoryViewModel();
+    // private readonly HomeViewModel _home;
+    // private readonly ProcessViewModel _process;
+    // private readonly ActionsViewModel _actions;
+    // private readonly MacrosViewModel _macros;
+    // private readonly ReporterViewModel _reporter;
+    // private readonly HistoryViewModel _history;
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(PageFactory pageFactory)
     {
-        CurrentView = _home;
+        _pageFactory = pageFactory;
+        // CurrentView = _home;
+        GoToHome();
     }
 
     [RelayCommand]
     private void SideMenuResize() => IsExpanded = !IsExpanded;
 
     [RelayCommand]
-    private void GoToHome() => CurrentView = _home;
+    private void GoToHome() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.Home);
 
     [RelayCommand]
-    private void GoToProcess() => CurrentView = _process;
+    private void GoToProcess() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.Process);
     [RelayCommand]
-    private void GoToActions() => CurrentView = _actions;
+    private void GoToActions() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.Actions);
     [RelayCommand]
-    private void GoToMacros() => CurrentView = _macros;
+    private void GoToMacros() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.Macros);
     [RelayCommand]
-    private void GoToReporter() => CurrentView = _reporter;
+    private void GoToReporter() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.Reporter);
     [RelayCommand]
-    private void GoToHistory() => CurrentView = _history;
+    private void GoToHistory() => CurrentView = _pageFactory.GetPageViewModel(ApplicationPageNames.History);
 
 }
