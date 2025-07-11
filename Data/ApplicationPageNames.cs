@@ -2,12 +2,12 @@ namespace realworld_avalonia.Data;
 
 public enum ApplicationPageNames
 {
-    unknown,
-    Home,
-    Process,
-    Actions,
-    Macros,
-    Reporter,
-    History,
-    Settings,
+  unknown,
+  Home,
+  Process,
+  Actions,
+  Macros,
+  Reporter,
+  History,
+  Settings,
 }

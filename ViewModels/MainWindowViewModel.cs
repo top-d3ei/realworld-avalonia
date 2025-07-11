@@ -19,8 +19,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(ReporterViewIsActive))]
     [NotifyPropertyChangedFor(nameof(HistoryViewIsActive))]
     [NotifyPropertyChangedFor(nameof(SettingsViewIsActive))]
-    // private ViewModelBase _currentView;
     private PageViewModel _currentView;
+    // private ViewModelBase _currentView;
     private PageFactory _pageFactory;
 
     public bool HomeViewIsActive => CurrentView.PageName == ApplicationPageNames.Home;
